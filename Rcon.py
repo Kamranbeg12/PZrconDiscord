@@ -6,11 +6,7 @@ import time
 from rcon.source import Client
 import json
 from pathlib import Path
-serverip = None
-serverrconport = None
-serverport =None
-serverpassword = None
-discord_webhook_url = None
+
 discordresponse= None
 previous_status = None
 previous_response = None
@@ -34,11 +30,11 @@ if file_path.exists():
             "serverport": None
         }
         
-        with open("savefile.json", "w") as file:
+        with open(file_path, "w") as file:
                 json.dump(loaded_data, file, indent=4)
                 exit(1)
     else:
-        with open("savefile.json", "r") as file:
+        with open(file_path, "r") as file:
             loaded_data = json.load(file)
         
 else:
@@ -50,21 +46,21 @@ else:
     "messageid": None,
     "serverport": None
     }
-    with open("savefile.json", "w") as file:
+    with open(file_path, "w") as file:
         json.dump(data_to_save, file, indent=4)
         print("File not found! Creating a new one...")
     exit(1)
 print(loaded_data)
 
-
+print(loaded_data.get("discord_webhook_url")+"?wait=true")
 
 if loaded_data.get("messageid") is None:
-    discordresponse = requests.post(discord_webhook_url+"?wait=true", json={"content": "Server status monitoring started!"})
+    discordresponse = requests.post(loaded_data.get("discord_webhook_url")+"?wait=true", json={"content": "Server status monitoring started!"})
     print(discordresponse.json)
     if discordresponse.status_code == 200:
         print("Initial message sent to Discord.")
         loaded_data["messageid"] = discordresponse.json().get("id")
-        with open("savefile.json", "w") as file:
+        with open(file_path, "w") as file:
             json.dump(loaded_data, file, indent=4)
 
 
@@ -75,7 +71,7 @@ while True:
     status = "offline"
     response = "N/A"
     try:
-        with Client(serverip, serverrconport, passwd=serverpassword, timeout=5.0) as client:
+        with Client(loaded_data.get("server_ip"), loaded_data.get("server_rconport"), passwd=loaded_data.get("server_password"), timeout=5.0) as client:
             response = client.run('players')
             print(response)
             status = "online"
@@ -108,7 +104,7 @@ while True:
                 "fields": [
                     {
                         "name": "IP",
-                        "value": "mauritania-gis.tun.ply.gg",
+                        "value": loaded_data.get("serverip"),
                         "inline": True
                     },
                     {
@@ -127,7 +123,7 @@ while True:
         }
         
         try:
-            requests.patch(f"{discord_webhook_url}/messages/{loaded_data['messageid']}", json=webhook_data)
+            requests.patch(f"{loaded_data.get('discord_webhook_url')}/messages/{loaded_data['messageid']}", json=webhook_data)
             print("Status posted to Discord")
         except Exception as e:
             print(f"Failed to post to Discord: {e}")
