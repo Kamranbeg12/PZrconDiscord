@@ -17,6 +17,8 @@ Leave "messageid" in savefile.json as it is, unless you know what you are doing 
 
 use alternate ip to show alternate public on webhook incase you are access server on lan, serverip should lan ip and alternate ip should public ip of server
 
+can run commands on server just type the command and press enter  
+
 # Note 2 
 ~~might add some more things, like if you are running from server on lan and you want to show public ip in webhook that is different from the ip you are susing to access the server, i could separate the two.~~
 
