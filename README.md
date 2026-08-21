@@ -15,6 +15,6 @@ Build it using
 Leave "messageid" in savefile.json as it is, unless you know what you are doing or if you need to post status as new message then make it null
 
 # Note 2 
-might add some more things like if you are running from server on lan and you want to show public ip in webhook that is different from the ip you are susing to access the server, i could separate the two.
+might add some more things, like if you are running from server on lan and you want to show public ip in webhook that is different from the ip you are susing to access the server, i could separate the two.
 
 maybe add some more things like command execution
