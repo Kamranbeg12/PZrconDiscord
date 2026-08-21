@@ -2,8 +2,8 @@
 A simple Rcon to Discord webhook "Connecter", to Show server status, IP,Port and Players online
 # Build
 Dependencies
-install dependenceies
-'python -m pip install requests rcon pathlib'
+install dependencies
+`python -m pip install requests rcon pathlib`
 
 Build it using 
 `pyisntaller --onefile Rcon.py`
