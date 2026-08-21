@@ -1,5 +1,5 @@
 # PZrconDiscord
-A simple Rcon to Discord webhook "Connecter", to Show server status, IP,Port and Players online
+A simple Rcon to Discord webhook "Connector", to Show server status, IP,Port and Players online
 # Build
 
 install dependencies
