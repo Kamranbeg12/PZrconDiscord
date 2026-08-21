@@ -12,4 +12,4 @@ Build it using
 2. Edit savefile.json with you Server details
 3. run it again 
 # Note
-Leave messageid in savefile.json as it is, unless you know what you are doing or if you need to post status as new message then make it null
+Leave "messageid" in savefile.json as it is, unless you know what you are doing or if you need to post status as new message then make it null
